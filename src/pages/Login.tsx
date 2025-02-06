@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { toast, ToastContainer } from 'react-toastify';
 import photoResto from '../assets/foto_resto1.jpg';
 
 const LogIn = () => {
@@ -16,7 +16,16 @@ const LogIn = () => {
     //Handle register the user
     const handleLogin = async () => {
         if (!email && !password.trim()) {
-            alert('Please enter the email and password');
+            toast.error('Please enter the email and password', {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light"
+              });
             return;
         }
         try {
@@ -31,8 +40,18 @@ const LogIn = () => {
                 }),
             })
 
+            //Manage the response
             if (!response.ok) {
-                alert('Error en el inicio de sesión. Verifica tus credenciales.');
+                toast.error('Error en el inicio de sesión. Verifica tus credenciales.', {
+                  position: "top-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light"
+                });
                 return;
             }
     
@@ -52,10 +71,11 @@ const LogIn = () => {
     return (
         <div className="flex items-center justify-center w-screen h-screen bg-white">
           <div className="flex w-[80%] h-[80%] gap-6">
-            {/* Card Section (Izquierda) */}
-            <div className="flex-1 flex h-1/3 justify-end self-end">
+            <ToastContainer />
+            {/* Card Section */}
+            <div className="flex-1 flex h-1/2 justify-end self-end">
               <div className="bg-blue-500 shadow-lg rounded-lg p-8 text-white w-full flex flex-col justify-between">
-                <p>
+                <p className="text-left">
                   No tienes cuenta?{" "}
                   <span
                     onClick={handleGoToRegister}
@@ -64,30 +84,32 @@ const LogIn = () => {
                     Regístrate
                   </span>
                 </p>
+                <span className="text-left">Email:</span>
                 <input
                   type="email"
                   placeholder="Añade tu email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full p-2 border border-white rounded bg-transparent text-white placeholder-white mb-2"
+                  className="w-[60%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
                 />
+                <span className="text-left">Escribe tu contraseña:</span>
                 <input
                   type="password"
                   placeholder="Escribe tu contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-2 border border-white rounded bg-transparent text-white placeholder-white mb-2"
+                  className="w-[60%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
                 />
-                <Button
+                <button
                   onClick={handleLogin}
-                  className="bg-blue-700 text-white px-4 py-2 rounded w-full cursor-pointer"
+                  className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
                 >
                   Entrar
-                </Button>
+                </button>
               </div>
             </div>
     
-            {/* Image Section (Derecha) */}
+            {/* Image Section */}
             <div className="flex-1 rounded-lg overflow-hidden shadow-lg">
               <img
                 src={photoResto}

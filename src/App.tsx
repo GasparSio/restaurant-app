@@ -7,7 +7,7 @@ import Restaurants from './pages/Restaurants'
 import RestaurantDetail from './pages/RestaurantDetail'
 
 function App() {
-
+  //Define the routes
   return (
       <Routes>
         <Route path='/' element={<Home />} />
