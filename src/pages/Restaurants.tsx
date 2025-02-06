@@ -44,7 +44,7 @@ const Restaurants: React.FC = () => {
           setLoading(false);
         });
     }, 1000);
-  }, []);
+  }, [restaurants]);
 
   const handleRestaurant = (restaurant: Restaurant) => {
     navigate("/restaurantdetail", { state: { restaurant } });
