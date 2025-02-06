@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar  as solidStar} from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash, faStar  as solidStar} from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { jwtDecode } from "jwt-decode";
 
@@ -26,22 +26,24 @@ const RestaurantDetail: React.FC = () => {
   const [rating, setRating] = useState(5);
   const [comments, setComments] = useState(restaurant?.comments || []);
   const [user, setUser] = useState<User | null>(null);
+  const [editingComment, setEditingComment] = useState<Comment | null>(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       try {
         const decodedToken = jwtDecode<{ username: string }>(token);
         console.log('decodedToken', decodedToken);
         setUser({
-          username: decodedToken.username, 
+          username: decodedToken.username,
         });
       } catch (error) {
         console.error("Error al decodificar el token:", error);
       }
     }
   }, []);
-  console.log('user', user);
   
   if (!restaurant) {
     return <p className="text-center mt-10 text-red-500">No se encontró información del restaurante.</p>;
@@ -54,10 +56,7 @@ const RestaurantDetail: React.FC = () => {
 
   // Function to POST comment
   const handleSubmit = async () => {
-    if (!comment.trim()) return;
-  
-    const token = localStorage.getItem("token");
-    console.log('token antes del POST al comment', token);
+    if (!comment.trim()) return; 
   
     const newComment = {
       text: comment,
@@ -79,12 +78,11 @@ const RestaurantDetail: React.FC = () => {
         body: JSON.stringify(newComment),
       });
   
-      console.log('response', response);
   
       //Handle the response
       if (response.ok) {
         setComments((prevComments: Comment[]) => [...prevComments, newComment]); // Add the new comment to the list
-        setComment(""); // Limpiamos el textarea
+        setComment(""); // Clean the textarea
         setRating(5); // Resetemos las estrellas
       } else {
         console.error("Error al enviar el comentario");
@@ -94,8 +92,98 @@ const RestaurantDetail: React.FC = () => {
     }
   };
 
+  // Function to handle editing a comment
+  const handleEditClick = (comment: Comment) => {
+    setEditingComment(comment);
+    setShowModal(true);
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editingComment || !editingComment.text.trim()) return;
+
+    try {
+      const url = `https://d5g0n9mm-5001.uks1.devtunnels.ms/api/comments/${editingComment.id}`;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(editingComment),
+      });
+
+      if (response.ok) {
+        setComments((prevComments: Comment[]) =>
+          prevComments.map((comment) =>
+            comment.id === editingComment.id ? editingComment : comment
+          )
+        );
+        setShowModal(false); // Close modal after saving
+        setEditingComment(null); // Reset the editing state
+      } else {
+        console.error("Error on editing comment");
+      }
+    } catch (error) {
+      console.error("Error on the request to edit the comment:", error);
+    }
+  };
+
+  // Function to handle deleting a comment
+  const handleDeleteClick = async (commentId: string) => {
+    try {
+      const url = `https://d5g0n9mm-5001.uks1.devtunnels.ms/api/comments/${restaurant.id}/comments/${commentId}`;
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        setComments((prevComments: Comment[]) =>
+          prevComments.filter((comment) => comment.id !== commentId)
+        );
+      } else {
+        console.error("Error al eliminar el comentario");
+      }
+    } catch (error) {
+      console.error("Error en la petición:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center w-screen min-h-screen bg-white">
+
+      {/* Modal for editing comment */}
+      {showModal && editingComment && (
+        <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-lg font-semibold mb-4">Editar Comentario</h2>
+            <textarea
+              className="w-full p-3 border border-black rounded-lg text-black placeholder-black focus:outline-none"
+              rows={3}
+              value={editingComment.text}
+              onChange={(e) =>
+                setEditingComment({ ...editingComment, text: e.target.value })
+              }
+            />
+            <div className="mt-4 flex justify-between">
+              <button
+                onClick={handleSaveEdit}
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+              >
+                Guardar
+              </button>
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 bg-gray-300 text-black rounded-lg"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="w-full max-w-[1440px] mx-auto">
 
         {/* Image restaurant */}
@@ -121,29 +209,47 @@ const RestaurantDetail: React.FC = () => {
             {/* Comments */}
             <div className="mt-6">
               <div className="space-y-4 overflow-y-auto">
-                {comments.length > 0 ? (
-                  comments.map((comment: Comment, index: number) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg shadow-sm"
-                    >
-                      {/* Estrellas según el rating del comentario */}
-                      <div className="flex items-center">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <FontAwesomeIcon
-                            key={i}
-                            icon={i < comment.rating ? solidStar : regularStar}
-                            className="text-yellow-500 text-lg"
-                          />
-                        ))}
-                      </div>
-                      <div className="text-black-600 font-semibold text-lg w-1/3">
-                        {comment.user.username}
-                      </div>
-                      <div className="text-gray-600 w-2/3">{comment.text}</div>
+              {comments.length > 0 ? (
+              comments.map((comment: Comment) => (
+                <div
+                  key={comment.id}
+                  className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg shadow-sm"
+                >
+                  {/* Estrellas */}
+                  <div className="flex items-center">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <FontAwesomeIcon
+                        key={i}
+                        icon={i < comment.rating ? solidStar : regularStar}
+                        className="text-yellow-500 text-lg"
+                      />
+                    ))}
+                  </div>
+                  <div className="text-black-600 font-semibold text-lg w-1/3">
+                    {comment.user.username}
+                  </div>
+                  <div className="text-gray-600 w-2/3">{comment.text}</div>
+
+                  {/* Show Edit and Delete buttons if user is the comment owner */}
+                  {user?.username === comment.user.username && (
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleEditClick(comment)}
+                        className="text-blue-500"
+                      >
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteClick(comment.id)}
+                        className="text-red-500"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
                     </div>
-                  ))
-                ) : (
+                  )}
+                </div>
+              ))
+            ) : (
                   <p className="text-gray-500">No hay comentarios aún.</p>
                 )}
               </div>

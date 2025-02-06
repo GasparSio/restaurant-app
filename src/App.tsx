@@ -5,6 +5,7 @@ import SingIn from './pages/SingIn'
 import LogIn from './pages/Login'
 import Restaurants from './pages/Restaurants'
 import RestaurantDetail from './pages/RestaurantDetail'
+import NewRestaurant from './pages/NewRestaurant'
 
 function App() {
   //Define the routes
@@ -15,6 +16,7 @@ function App() {
         <Route path='/login' element={< LogIn/>} />
         <Route path='/restaurants' element={<Restaurants />} />
         <Route path='/restaurantdetail' element={<RestaurantDetail />} />
+        <Route path='/newrestaurant' element={<NewRestaurant />} />
         <Route path='*' element={<Home />} />
       </Routes>
   )
