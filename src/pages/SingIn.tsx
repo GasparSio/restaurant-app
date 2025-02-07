@@ -13,7 +13,9 @@ const SingIn = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleNextStep = () => {
+  //Handle next step to insert the password
+  const handleNextStep = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     if (email.trim() && username.trim()) {
       setStep(2);
     } else {
@@ -23,7 +25,9 @@ const SingIn = () => {
     }
   };
 
-  const handleRegister = async () => {
+  //Handle the register of the user
+  const handleRegister = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     if (!password.trim()) {
       toast.error("Please enter a password", {
         autoClose: 2000,
@@ -31,12 +35,15 @@ const SingIn = () => {
       return;
     }
 
+    //Request to the API to register the user
     try {
       const response = await fetch("http://localhost:5001/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
       });
+
+      //Handle the response of the API
       if (response.ok) {
         toast.success("User registered successfully!", {
           autoClose: 2000,
@@ -56,12 +63,13 @@ const SingIn = () => {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-white">
-      {/* Contenedor principal con cambio de dirección */}
+      {/* Card Content */}
       <div className="flex flex-col-reverse md:flex-row w-[80%] h-auto md:h-[80%] gap-6">
-        {/* Sección de formulario */}
-        <div className="flex-1 flex justify-center md:justify-end h-[60%] max-h-[600px]">
-          <div className="bg-blue-500 shadow-lg rounded-lg p-8 text-white w-full flex flex-col justify-between">
+        {/* Form section */}
+        <div className="flex-1 flex justify-center md:self-end md:justify-end h-[60%] max-h-[600px]">
+          <div className="bg-[#264BEB] shadow-lg rounded-lg p-8 text-white w-full flex flex-col justify-between">
             <ToastContainer />
+            {/* Step 1? show the first form */}
             {step === 1 ? (
               <>
                 <span className="text-2xl font-bold w-[30%] max-w-[100px]">
@@ -75,31 +83,37 @@ const SingIn = () => {
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
 
-                <span className="text-left">Email:</span>
-                <input
-                  type="email"
-                  placeholder="Añade tu email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-[70%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
-                />
-                <span className="text-left">Nombre de usuario:</span>
-                <input
-                  type="text"
-                  placeholder="Añade tu nombre"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="w-[70%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
-                />
-                <button
-                  onClick={handleNextStep}
-                  className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
+                <form
+                  onSubmit={handleNextStep}
+                  className="flex flex-col w-full"
                 >
-                  Siguiente
-                </button>
+                  <span className="text-left">Email:</span>
+                  <input
+                    type="email"
+                    placeholder="Añade tu email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-[80%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
+                  />
+                  <span className="text-left">Nombre de usuario:</span>
+                  <input
+                    type="text"
+                    placeholder="Añade tu nombre"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="w-[80%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
+                  />
+                  <button
+                    type="submit"
+                    className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
+                  >
+                    Siguiente
+                  </button>
+                </form>
               </>
             ) : (
-              <div className="rounded-lg p-8 text-white w-full flex flex-col">
+              //Step 2? show the second part of the form
+              <>
                 <span className="text-2xl font-bold w-[30%] max-w-[100px]">
                   <img src={logo} alt="tailor icon" />
                 </span>
@@ -111,26 +125,31 @@ const SingIn = () => {
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
 
-                <span className="text-left">Crea una nueva contraseña:</span>
-                <input
-                  type="password"
-                  placeholder="Añade una contraseña"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-[70%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
-                />
-                <button
-                  onClick={handleRegister}
-                  className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
+                <form
+                  onSubmit={handleRegister}
+                  className="flex flex-col w-full"
                 >
-                  Finalizar
-                </button>
-              </div>
+                  <span className="text-left">Crea una nueva contraseña:</span>
+                  <input
+                    type="password"
+                    placeholder="Añade una contraseña"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-[70%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
+                  />
+                  <button
+                    type="submit"
+                    className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
+                  >
+                    Finalizar
+                  </button>
+                </form>
+              </>
             )}
           </div>
         </div>
 
-        {/* Sección de imagen */}
+        {/* Image section */}
         <div className="flex-1 rounded-lg overflow-hidden shadow-lg">
           <img
             src={photoResto}

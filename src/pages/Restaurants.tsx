@@ -8,10 +8,14 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { mapStyles } from "../assets/map_styles";
 import { toast, ToastContainer } from "react-toastify";
+
+//Map styles
 const mapContainerStyle = {
   width: "100%",
   height: "100%",
 };
+
+//Set the center of the map in Madrid
 const center = { lat: 40.4363713, lng: -3.6842974 };
 
 interface Comment {
@@ -50,6 +54,7 @@ const Restaurants: React.FC = () => {
       }
     }
 
+    // Fetch restaurants from API
     setTimeout(() => {
       fetch("http://localhost:5001/api/restaurants")
         .then((response) => response.json())
@@ -66,6 +71,7 @@ const Restaurants: React.FC = () => {
     }, 1000);
   }, []);
 
+  // Handle restaurant click to navigate to detail page
   const handleRestaurant = (restaurant: Restaurant) => {
     navigate("/restaurantdetail", { state: { restaurant } });
   };
@@ -73,7 +79,7 @@ const Restaurants: React.FC = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-white relative">
       <ToastContainer />
-      {/* Botón de usuario */}
+      {/* User Menu */}
       <div className="absolute top-4 right-4">
         <button
           className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 hover:bg-gray-100"
@@ -111,9 +117,9 @@ const Restaurants: React.FC = () => {
         </div>
       )}
 
-      {/* Contenedor principal - Responsive */}
+      {/* Main Content */}
       <div className="flex flex-col md:flex-row w-[80%] h-auto md:h-[80%] gap-6">
-        {/* Mapa - Arriba en móviles */}
+        {/* Map section */}
         <div className="w-full md:w-3/5 h-[300px] md:h-full rounded-lg overflow-hidden shadow-lg bg-gray-200 md:order-1">
           <LoadScript
             googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
@@ -143,7 +149,7 @@ const Restaurants: React.FC = () => {
           </LoadScript>
         </div>
 
-        {/* Lista de restaurantes - Abajo en móviles */}
+        {/* Restaurant List */}
         <div className="w-full md:w-2/5 h-auto overflow-y-auto bg-white p-4 shadow-lg rounded-lg relative md:order-2">
           {restaurants.map((restaurant) => {
             const averageRating =
@@ -155,6 +161,7 @@ const Restaurants: React.FC = () => {
                 : 0;
 
             return (
+              // Handle restaurant click to navigate to detail page
               <div
                 onClick={() => handleRestaurant(restaurant)}
                 key={restaurant.id}
@@ -173,7 +180,7 @@ const Restaurants: React.FC = () => {
                     {restaurant.address}
                   </span>
 
-                  {/* Estrellas dinámicas */}
+                  {/* Dinamic stars */}
                   <span className="text-blue-500 flex items-center gap-1 text-center">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <FontAwesomeIcon

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import photoResto from "../assets/foto_resto1.jpg";
+import logo from "../assets/Type=default.svg";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,8 @@ const LogIn = () => {
   };
 
   // Handle user login
-  const handleLogin = async () => {
+  const handleLogin = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     if (!email || !password.trim()) {
       toast.error("Por favor, ingresa el email y la contraseña.", {
         autoClose: 2000,
@@ -22,6 +24,7 @@ const LogIn = () => {
       return;
     }
 
+    // Send login request
     try {
       const response = await fetch("http://localhost:5001/api/auth/login", {
         method: "POST",
@@ -31,6 +34,7 @@ const LogIn = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      //Handle response
       if (!response.ok) {
         toast.error(
           "Error en el inicio de sesión. Verifica tus credenciales.",
@@ -46,7 +50,9 @@ const LogIn = () => {
         localStorage.setItem("token", data.token);
         navigate("/restaurants");
       } else {
-        alert("No se recibió un token válido");
+        toast.error(`Credenciales invalidas`, {
+          autoClose: 2000,
+        });
       }
     } catch (error) {
       toast.error(`Error al iniciar sesión: ${error}`, {
@@ -70,8 +76,35 @@ const LogIn = () => {
         </div>
 
         {/* Sección del formulario - Aparece abajo en móvil */}
-        <div className="flex-1 flex h-[50%] justify-center md:justify-end md:order-1">
-          <div className="bg-blue-500 shadow-lg rounded-lg p-8 text-white w-full flex flex-col justify-between">
+        <div className="flex-1 flex h-[50%] md:self-end justify-center md:justify-end md:order-1">
+          <div className="bg-[#264BEB] shadow-lg rounded-lg p-8 text-white w-full flex flex-col justify-around">
+            <span className="text-2xl font-bold w-[30%] max-w-[100px]">
+              <img src={logo} alt="tailor icon" />
+            </span>
+            <form onSubmit={handleLogin} className="flex flex-col w-full">
+              <span className="text-left">Email:</span>
+              <input
+                type="email"
+                placeholder="Escribe tu email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-[80%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
+              />
+              <span className="text-left">Contraseña:</span>
+              <input
+                type="password"
+                placeholder="Escribe tu contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-[80%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
+              />
+              <button
+                type="submit"
+                className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
+              >
+                Entrar
+              </button>
+            </form>
             <p className="text-left">
               No tienes cuenta?{" "}
               <span
@@ -81,28 +114,6 @@ const LogIn = () => {
                 Regístrate
               </span>
             </p>
-            <span className="text-left">Email:</span>
-            <input
-              type="email"
-              placeholder="Añade tu email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
-            />
-            <span className="text-left">Escribe tu contraseña:</span>
-            <input
-              type="password"
-              placeholder="Escribe tu contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
-            />
-            <button
-              onClick={handleLogin}
-              className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
-            >
-              Entrar
-            </button>
           </div>
         </div>
       </div>

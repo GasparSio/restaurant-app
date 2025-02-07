@@ -6,18 +6,19 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen bg-white">
-      <div className="flex w-[80%] h-[80%] gap-6">
+    <div className="flex flex-col items-center justify-center w-screen h-screen bg-white">
+      <div className="flex flex-col-reverse md:flex-row w-[80%] h-[80%] gap-6">
+        
         {/* Card Section */}
-        <div className="flex-1 bg-gray-100 rounded-lg p-8 flex flex-col h-1/3 justify-end self-end shadow-lg text-justify">
+        <div className="flex-1/3 bg-[#F1F1F0] min-h[400px] justify-evenly rounded-lg p-6 flex flex-col h-[auto] self-end shadow-lg text-justify">
           <div>
             <div className="flex items-center gap-</div>2 mb-4">
               <span className="text-2xl font-bold w-[30%] max-w-[100px]">
                 <img src={logo} alt="tailor icon" />
               </span>
             </div>
-            <p className="text-gray-700 mb-2">Hola,</p>
-            <p className="text-gray-700 mb-6">
+            <p className="mb-2" style={{ fontFamily: 'Roobert', fontWeight: 400, fontSize: '28px', color: '#0B0B0B', lineHeight: '42px' }}>Hola,</p>
+            <p className="mb-2" style={{ fontFamily: 'Roobert', fontWeight: 400, fontSize: '28px', color: '#0B0B0B', lineHeight: '42px' }}>
               Bienvenido a la prueba de Tailor hub, en ella has de añadir los
               restaurantes favoritos donde te gustaría ir en tu onboarding.
             </p>
@@ -25,6 +26,7 @@ const Home = () => {
           <button
             onClick={() => navigate("/singin")}
             className="cursor-pointer border border-black w-20 h-9 rounded-[10px]"
+            style={{ fontFamily: 'Roobert', fontWeight: 400, fontSize: '18px', color: '#0B0B0B', lineHeight: '20px' }}
           >
             Entrar
           </button>
