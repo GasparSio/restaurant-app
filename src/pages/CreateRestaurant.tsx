@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import logo from "../assets/LogoSimple.svg";
 
 interface Restaurant {
   name: string;
@@ -91,27 +92,33 @@ export default function NewRestaurant() {
   // If the restaurant is saved successfully, show a success message
   if (success) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <span className="text-blue-600 text-lg font-semibold">
-          Restaurante guardado
-        </span>
-        <button className="mt-4" onClick={() => navigate("/restaurants")}>
-          Ver restaurante
-        </button>
+      <div className="flex flex-col items-center justify-center w-screen h-screen bg-white">
+        <div className="h-[40%] max-h-[800px] flex flex-col justify-evenly items-center w-[40%] max-w-[600px]">
+          <img src={logo} alt="Logo" className="w-15 h-15" />
+          <span className="text-blue-600 text-lg font-semibold">
+            Restaurante guardado
+          </span>
+          <button 
+            className="h-[40px] w-[50%] border-black border rounded-[10px] font-bold mt-4" 
+            onClick={() => navigate("/restaurants")}>
+            Ver restaurante
+          </button>
+          <img src={logo} alt="Logo" className="w-15 h-15" />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center w-screen h-screen bg-white">
       <ToastContainer />
       {/* Form Section */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl flex"
+        className="bg-white p-6 rounded-lg shadow-lg w-[80%] max-w-[746px] flex text-left"
       >
         <div
-          className="w-1/3 h-40 bg-gray-200 flex items-center justify-center rounded-lg cursor-pointer overflow-hidden"
+          className="w-[50%] h-auto bg-gray-200 flex items-center justify-center rounded-lg cursor-pointer overflow-hidden"
           onClick={() => document.getElementById("imageInput")?.click()}
         >
           {preview ? (
@@ -121,7 +128,7 @@ export default function NewRestaurant() {
               className="w-full h-full object-cover"
             />
           ) : (
-            <span>Añadir imagen</span>
+            <span className="font-bold">Añadir imagen</span>
           )}
           <input
             type="file"
@@ -132,66 +139,71 @@ export default function NewRestaurant() {
           />
         </div>
 
-        <div className="w-2/3 pl-4">
-          <label className="block">Nombre del restaurante:</label>
+        <div className="w-[50%] pl-4">
+          <label className="block font-bold">Nombre del restaurante:</label>
           <input
             type="text"
             name="name"
-            className="border p-2 w-full rounded"
+            className="border p-2 w-full rounded-[15px]"
             onChange={handleChange}
             required
           />
 
-          <label className="block mt-2">Dirección del restaurante:</label>
+          <label className="font-bold block mt-2">
+            Dirección del restaurante:
+          </label>
           <input
             type="text"
             name="address"
-            className="border p-2 w-full rounded"
+            className="border p-2 w-full rounded-[15px]"
             onChange={handleChange}
             required
           />
 
-          <label className="block mt-2">Cuisine:</label>
+          <label className="font-bold block mt-2">Cuisine:</label>
           <input
             type="text"
             name="cuisine"
-            className="border p-2 w-full rounded"
+            className="border p-2 w-full rounded-[15px]"
             onChange={handleChange}
             required
           />
 
-          <div className="flex space-x-2 mt-2">
+          <div className="flex flex-row justify-between space-x-2 mt-2">
             <div>
-              <label className="block">Lat:</label>
+              <label className="font-bold block">Lat:</label>
               <input
                 type="text"
                 name="lat"
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded-[15px]"
                 onChange={handleChange}
                 required
               />
             </div>
             <div>
-              <label className="block">Lng:</label>
+              <label className="font-bold block">Lng:</label>
               <input
                 type="text"
                 name="lng"
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded-[15px]"
                 onChange={handleChange}
                 required
               />
             </div>
           </div>
 
-          <label className="block mt-2">Descripción:</label>
+          <label className="font-bold block mt-2">Descripción:</label>
           <textarea
             name="description"
-            className="border p-2 w-full rounded"
+            className="border p-2 w-full rounded-[15px]"
             onChange={handleChange}
             required
           />
 
-          <button type="submit" className="mt-4 w-full">
+          <button
+            type="submit"
+            className="h-[40px] w-[50%] border-black border rounded-[10px] font-bold mt-4"
+          >
             Guardar
           </button>
         </div>
