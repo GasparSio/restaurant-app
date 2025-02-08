@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import logo from "../../public/assets/Type=default.svg";
-import photoResto from "../../public/assets/foto_resto1.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,7 +12,7 @@ const Home = () => {
           <div>
             <div className="flex items-center gap-</div>2 mb-4">
               <span className="text-2xl font-bold w-[30%] max-w-[100px] mb-[15px]">
-                <img src={logo} alt="tailor icon" />
+                <img src="../../public/assets/Type=Default.svg" alt="tailor icon" />
               </span>
             </div>
             <p className="mb-2 text-[20px]">Hola,</p>
@@ -38,7 +36,7 @@ const Home = () => {
         {/* Image Section */}
         <div className="flex-2 rounded-lg overflow-hidden shadow-lg">
           <img
-            src={photoResto}
+            src="../../public/assets/foto_resto1.jpg"
             alt="Restaurant interior"
             className="w-full h-full object-cover"
           />

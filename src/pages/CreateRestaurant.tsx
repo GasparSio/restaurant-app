@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import logo from "../../public/assets/LogoSimple.svg";
 
 interface Restaurant {
   name: string;
@@ -97,7 +96,7 @@ export default function NewRestaurant() {
     return (
       <div className="flex flex-col items-center justify-center w-screen h-screen bg-white">
         <div className="h-[40%] max-h-[800px] flex flex-col justify-evenly items-center w-[40%] max-w-[600px]">
-          <img src={logo} alt="Logo" className="w-10 h-10" />
+          <img src="../../public/assets/LogoSimple.svg" alt="Logo" className="w-10 h-10" />
           <span className="text-blue-600 text-lg font-semibold">
             Restaurante guardado
           </span>
@@ -107,7 +106,7 @@ export default function NewRestaurant() {
           >
             Ver restaurante
           </button>
-          <img src={logo} alt="Logo" className="w-10 h-10" />
+          <img src="../../public/assets/LogoSimple.svg" alt="Logo" className="w-10 h-10" />
         </div>
       </div>
     );
@@ -126,7 +125,7 @@ export default function NewRestaurant() {
         </button>
       </div>
 
-      <img src={logo} alt="Logo" className="w-10 h-10" />
+      <img src="../../public/assets/LogoSimple.svg" alt="Logo" className="w-10 h-10" />
       {/* Form Section */}
       <form
         onSubmit={handleSubmit}
@@ -231,7 +230,7 @@ export default function NewRestaurant() {
           </button>
         </div>
       </form>
-      <img src={logo} alt="Logo" className="w-10 h-10" />
+      <img src="../../public/assets/LogoSimple.svg" alt="Logo" className="w-10 h-10" />
     </div>
   );
 }

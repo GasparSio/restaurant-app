@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
-// import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
-// import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { mapStyles } from "../../public/assets/map_styles";
 import { toast, ToastContainer } from "react-toastify";
 
