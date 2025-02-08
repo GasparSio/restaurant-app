@@ -67,7 +67,7 @@ const LogIn = () => {
         {/* Sección de imagen - Aparece arriba en móvil */}
         <div className="flex-1 rounded-lg overflow-hidden shadow-lg md:order-2">
           <img
-            src="../../public/assets/foto_resto1.jpg"
+            src="/assets/foto_resto1.jpg"
             alt="Descripción de la imagen"
             className="w-full h-full object-cover"
           />
@@ -77,7 +77,7 @@ const LogIn = () => {
         <div className="flex-1 flex h-[50%] md:self-end justify-center md:justify-end md:order-1">
           <div className="bg-[#264BEB] shadow-lg rounded-[20px] p-8 text-white w-full flex flex-col justify-around">
             <span className="text-2xl font-bold w-[30%] max-w-[100px]">
-              <img src="../../public/assets/LogoCompletoBlanco.svg" alt="tailor icon" />
+              <img src="/assets/LogoCompletoBlanco.svg" alt="tailor icon" />
             </span>
             <form onSubmit={handleLogin} className="flex flex-col w-full">
               <span className="text-left font-bold">Email:</span>

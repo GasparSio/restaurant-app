@@ -38,20 +38,6 @@ const Restaurants: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
-    // if (!token) {
-    //   navigate("/");
-    // } else {
-    //   try {
-    //     const decodedToken = jwtDecode<{ username: string }>(token);
-    //     setUserName(decodedToken.username);
-    //   } catch (error) {
-    //     toast.error(`Error al decodificar el token: ${error}`, {
-    //       autoClose: 2000,
-    //     });
-    //   }
-    // }
-
     // Fetch restaurants from API
     setTimeout(() => {
       fetch("https://restaurant-api-ld1w.onrender.com/api/restaurants")

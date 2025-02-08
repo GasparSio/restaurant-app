@@ -71,7 +71,7 @@ const SingIn = () => {
             {step === 1 ? (
               <>
                 <span className="text-2xl font-bold w-[30%] max-w-[100px] mb-[20px]">
-                  <img src="../../public/assets/LogoCompletoBlanco.svg" alt="tailor icon" />
+                  <img src="/assets/LogoCompletoBlanco.svg" alt="tailor icon" />
                 </span>
 
                 <button
@@ -113,7 +113,7 @@ const SingIn = () => {
               //Step 2? show the second part of the form
               <>
                 <span className="text-2xl font-bold w-[30%] max-w-[100px] mb-[20px]">
-                  <img src="../../public/assets/LogoCompletoBlanco.svg" alt="tailor icon" />
+                  <img src="/assets/LogoCompletoBlanco.svg" alt="tailor icon" />
                 </span>
 
                 <button
@@ -150,7 +150,7 @@ const SingIn = () => {
         {/* Image section */}
         <div className="flex-1 rounded-lg overflow-hidden shadow-lg">
           <img
-            src="../../public/assets/foto_resto1.jpg"
+            src="/assets/foto_resto1.jpg"
             alt="Descripción de la imagen"
             className="w-full h-full object-cover"
           />

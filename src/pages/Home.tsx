@@ -12,7 +12,7 @@ const Home = () => {
           <div>
             <div className="flex items-center gap-</div>2 mb-4">
               <span className="text-2xl font-bold w-[30%] max-w-[100px] mb-[15px]">
-                <img src="../../public/assets/Type=Default.svg" alt="tailor icon" />
+                <img src="/assets/Type=Default.svg" alt="tailor icon" />
               </span>
             </div>
             <p className="mb-2 text-[20px]">Hola,</p>
@@ -36,7 +36,7 @@ const Home = () => {
         {/* Image Section */}
         <div className="flex-2 rounded-lg overflow-hidden shadow-lg">
           <img
-            src="../../public/assets/foto_resto1.jpg"
+            src="/assets/foto_resto1.jpg"
             alt="Restaurant interior"
             className="w-full h-full object-cover"
           />
