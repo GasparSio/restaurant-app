@@ -37,7 +37,7 @@ const SingIn = () => {
 
     //Request to the API to register the user
     try {
-      const response = await fetch("http://localhost:5001/api/auth/register", {
+      const response = await fetch("https://restaurant-api-ld1w.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),

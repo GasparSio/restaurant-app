@@ -70,7 +70,7 @@ export default function NewRestaurant() {
 
     // Send the data to the server to create a new restaurant
     try {
-      const response = await fetch("http://localhost:5001/api/restaurants", {
+      const response = await fetch("https://restaurant-api-ld1w.onrender.com/api/restaurants", {
         method: "POST",
         body: data,
       });

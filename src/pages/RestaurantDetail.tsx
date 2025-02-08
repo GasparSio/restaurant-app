@@ -90,7 +90,7 @@ const RestaurantDetail: React.FC = () => {
     };
 
     try {
-      const url = `http://localhost:5001/api/comments`;
+      const url = `https://restaurant-api-ld1w.onrender.com/api/comments`;
       const response = await fetch(`${url}/${restaurant.id}`, {
         method: "POST",
         headers: {
@@ -130,7 +130,7 @@ const RestaurantDetail: React.FC = () => {
     if (!editingComment || !editingComment.text.trim()) return;
 
     try {
-      const url = `http://localhost:5001/api/comments/${restaurant.id}/edit/${editingComment.id}`;
+      const url = `https://restaurant-api-ld1w.onrender.com/api/comments/${restaurant.id}/edit/${editingComment.id}`;
       const response = await fetch(url, {
         method: "PUT",
         headers: {
@@ -166,7 +166,7 @@ const RestaurantDetail: React.FC = () => {
   // Function to handle deleting a comment
   const handleDeleteClick = async (commentId: string) => {
     try {
-      const url = `http://localhost:5001/api/comments/${restaurant.id}/delete/${commentId}`;
+      const url = `https://restaurant-api-ld1w.onrender.com/api/comments/${restaurant.id}/delete/${commentId}`;
       const response = await fetch(url, {
         method: "DELETE",
         headers: {
@@ -251,7 +251,7 @@ const RestaurantDetail: React.FC = () => {
         {/* Image restaurant */}
         <div className="w-[90%] h-80 my-6 relative mx-auto">
           <img
-            src={`http://localhost:5001/${restaurant.image}`}
+            src={`https://restaurant-api-ld1w.onrender.com/${restaurant.image}`}
             alt={restaurant.name}
             className="w-full h-full relative object-cover rounded-lg shadow-lg"
           />

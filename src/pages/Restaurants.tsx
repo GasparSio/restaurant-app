@@ -56,7 +56,7 @@ const Restaurants: React.FC = () => {
 
     // Fetch restaurants from API
     setTimeout(() => {
-      fetch("http://localhost:5001/api/restaurants")
+      fetch("https://restaurant-api-ld1w.onrender.com/api/restaurants")
         .then((response) => response.json())
         .then((data) => {
           setRestaurants(data);
@@ -138,7 +138,7 @@ const Restaurants: React.FC = () => {
                 className="flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-100"
               >
                 <img
-                  src={`http://localhost:5001/${restaurant.image}`}
+                  src={`https://restaurant-api-ld1w.onrender.com/${restaurant.image}`}
                   alt={restaurant.name}
                   className="w-24 h-24 rounded-lg object-cover"
                 />
