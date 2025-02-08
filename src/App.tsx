@@ -5,7 +5,7 @@ import SingIn from './pages/SingIn'
 import LogIn from './pages/Login'
 import Restaurants from './pages/Restaurants'
 import RestaurantDetail from './pages/RestaurantDetail'
-import NewRestaurant from './pages/NewRestaurant'
+import NewRestaurant from './pages/CreateRestaurant'
 
 function App() {
   //Define the routes
