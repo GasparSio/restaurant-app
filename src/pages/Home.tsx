@@ -13,20 +13,23 @@ const Home = () => {
         <div className="flex-1/3 bg-[#F1F1F0] min-h[400px] justify-evenly rounded-lg p-6 flex flex-col h-[auto] self-end shadow-lg text-justify">
           <div>
             <div className="flex items-center gap-</div>2 mb-4">
-              <span className="text-2xl font-bold w-[30%] max-w-[100px]">
+              <span className="text-2xl font-bold w-[30%] max-w-[100px] mb-[15px]">
                 <img src={logo} alt="tailor icon" />
               </span>
             </div>
-            <p className="mb-2" style={{ fontFamily: 'Roobert', fontWeight: 400, fontSize: '28px', color: '#0B0B0B', lineHeight: '42px' }}>Hola,</p>
-            <p className="mb-2" style={{ fontFamily: 'Roobert', fontWeight: 400, fontSize: '28px', color: '#0B0B0B', lineHeight: '42px' }}>
-              Bienvenido a la prueba de Tailor hub, en ella has de añadir los
-              restaurantes favoritos donde te gustaría ir en tu onboarding.
+            <p className="mb-2 text-[20px]">Hola,</p>
+            <p className="mb-2">
+              Esta web te permitirá explorar una variedad de opciones
+              gastronómicas y seleccionar aquellos lugares que más te atraigan.
+              Podrás ver detalles de cada restaurante, incluyendo su menú,
+              ubicación y opiniones de otros usuarios. Esperamos que disfrutes
+              de esta experiencia y encuentres los mejores lugares para tus
+              futuras visitas.
             </p>
           </div>
           <button
             onClick={() => navigate("/singin")}
-            className="cursor-pointer border border-black w-20 h-9 rounded-[10px]"
-            style={{ fontFamily: 'Roobert', fontWeight: 400, fontSize: '18px', color: '#0B0B0B', lineHeight: '20px' }}
+            className="cursor-pointer border border-black w-20 h-9 rounded-[15px] mt-[10px]"
           >
             Entrar
           </button>

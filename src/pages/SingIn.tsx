@@ -66,28 +66,28 @@ const SingIn = () => {
       {/* Card Content */}
       <div className="flex flex-col-reverse md:flex-row w-[80%] h-auto md:h-[80%] gap-6">
         {/* Form section */}
-        <div className="flex-1 flex justify-center md:self-end md:justify-end h-[60%] max-h-[600px]">
+        <div className="flex-1 h-[auto] flex justify-center md:self-end md:justify-end max-h-[600px]">
           <div className="bg-[#264BEB] shadow-lg rounded-lg p-8 text-white w-full flex flex-col justify-between">
             <ToastContainer />
             {/* Step 1? show the first form */}
             {step === 1 ? (
               <>
-                <span className="text-2xl font-bold w-[30%] max-w-[100px]">
+                <span className="text-2xl font-bold w-[30%] max-w-[100px] mb-[20px]">
                   <img src={logo} alt="tailor icon" />
                 </span>
 
                 <button
                   onClick={() => navigate("/")}
-                  className="cursor-pointer w-[60px] h-[30px] border border-white rounded-[10px]"
+                  className="cursor-pointer w-[60px] h-[35px] border border-white rounded-[13px]"
                 >
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
 
                 <form
                   onSubmit={handleNextStep}
-                  className="flex flex-col w-full"
+                  className="flex flex-col w-full h-auto min-h-[210px] justify-between mt-[40px]"
                 >
-                  <span className="text-left">Email:</span>
+                  <span className="font-bold text-left">Email:</span>
                   <input
                     type="email"
                     placeholder="Añade tu email"
@@ -95,7 +95,7 @@ const SingIn = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-[80%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
                   />
-                  <span className="text-left">Nombre de usuario:</span>
+                  <span className="font-bold text-left">Nombre de usuario:</span>
                   <input
                     type="text"
                     placeholder="Añade tu nombre"
@@ -105,7 +105,7 @@ const SingIn = () => {
                   />
                   <button
                     type="submit"
-                    className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
+                    className="font-bold bg-white text-[black] cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
                   >
                     Siguiente
                   </button>
@@ -114,7 +114,7 @@ const SingIn = () => {
             ) : (
               //Step 2? show the second part of the form
               <>
-                <span className="text-2xl font-bold w-[30%] max-w-[100px]">
+                <span className="text-2xl font-bold w-[30%] max-w-[100px] mb-[20px]">
                   <img src={logo} alt="tailor icon" />
                 </span>
 
@@ -127,9 +127,9 @@ const SingIn = () => {
 
                 <form
                   onSubmit={handleRegister}
-                  className="flex flex-col w-full"
+                  className="flex flex-col w-full h-auto min-h-[125px] justify-between mt-[40px]"
                 >
-                  <span className="text-left">Crea una nueva contraseña:</span>
+                  <span className="font-bold text-left">Crea una nueva contraseña:</span>
                   <input
                     type="password"
                     placeholder="Añade una contraseña"
@@ -139,7 +139,7 @@ const SingIn = () => {
                   />
                   <button
                     type="submit"
-                    className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
+                    className="font-bold bg-white text-[black] cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
                   >
                     Finalizar
                   </button>

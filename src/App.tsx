@@ -6,6 +6,7 @@ import LogIn from './pages/Login'
 import Restaurants from './pages/Restaurants'
 import RestaurantDetail from './pages/RestaurantDetail'
 import NewRestaurant from './pages/CreateRestaurant'
+import Layout from './pages/Layout'
 
 function App() {
   //Define the routes
@@ -14,9 +15,11 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/singin' element={<SingIn />} />
         <Route path='/login' element={< LogIn/>} />
-        <Route path='/restaurants' element={<Restaurants />} />
-        <Route path='/restaurantdetail' element={<RestaurantDetail />} />
-        <Route path='/newrestaurant' element={<NewRestaurant />} />
+        <Route element={<Layout />} >
+          <Route path='/restaurants' element={<Restaurants />} />
+          <Route path='/restaurantdetail' element={<RestaurantDetail />} />
+          <Route path='/newrestaurant' element={<NewRestaurant />} />
+        </Route>
         <Route path='*' element={<Home />} />
       </Routes>
   )

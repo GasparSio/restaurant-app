@@ -234,7 +234,7 @@ const RestaurantDetail: React.FC = () => {
         </div>
       )}
 
-      <div className="w-full max-w-[1440px] mx-auto">
+      <div className="w-full max-w-[1440px] mx-auto mt-[80px]">
         {/* Image restaurant */}
         <div className="w-[90%] h-80 my-6 relative mx-auto">
           <img
