@@ -69,18 +69,19 @@ export default function Layout() {
           </button>
 
           {isMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-blue-600 text-white rounded-[15px_0px_15px_15px] shadow-lg p-2 z-[999]">
+            <div className="absolute w-[200px] right-0 mt-2 bg-blue-600 text-white rounded-[15px_0px_15px_15px] shadow-lg p-2 z-[999]">
               <button
-                className="block w-full text-left px-4 py-2 hover:bg-blue-500 rounded"
+                className="font-bold block w-full text-left px-4 py-2 hover:bg-blue-500 rounded"
                 onClick={() => navigate("/newrestaurant")}
               >
                 Añadir Restaurante
               </button>
+              <div className="m-auto h-[1px] w-[90%] bg-[white] rounded-[10px]"></div>
               <button
-                className="block w-full text-left px-4 py-2 mt-2 hover:bg-blue-500 rounded"
+                className="mt-[20px] mb-1 font-bold bg-white text-[black] cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
                 onClick={handleLogout}
               >
-                Log Out
+                Salir
               </button>
             </div>
           )}
