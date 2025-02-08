@@ -4,7 +4,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast, ToastContainer } from "react-toastify";
 import photoResto from "../assets/foto_resto1.jpg";
-import logo from "../assets/Type=default.svg";
+import logo from "../assets/LogoCompletoBlanco.svg";
 
 const SingIn = () => {
   const [step, setStep] = useState(1);

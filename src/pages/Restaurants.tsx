@@ -143,6 +143,10 @@ const Restaurants: React.FC = () => {
                     lng: Number(restaurant.lng),
                   }}
                   title={restaurant.name}
+                  icon={{
+                    url: "../assets/Ellipse 1.png",
+                    scale: 30,
+                  }}
                 />
               ))}
             </GoogleMap>
