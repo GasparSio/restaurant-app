@@ -76,6 +76,7 @@ export default function NewRestaurant() {
         toast.success(`Restaurante agregado exitosamente`, {
           autoClose: 2000,
         });
+        //Setting success to true to show the success render
         setSuccess(true);
       } else {
         toast.error(`Error al agregar restaurante`, {
@@ -115,10 +116,11 @@ export default function NewRestaurant() {
       {/* Form Section */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-lg w-[80%] max-w-[746px] flex text-left"
+        className="bg-white p-6 rounded-lg shadow-lg w-[80%] max-w-[746px] flex flex-col md:flex-row text-left"
       >
+        {/* Image Section */}
         <div
-          className="w-[50%] h-auto bg-gray-200 flex items-center justify-center rounded-lg cursor-pointer overflow-hidden"
+          className="md:w-[50%] min-h-[200px] bg-gray-200 flex items-center mb-[30px] md:mb-[0px] justify-center rounded-lg cursor-pointer overflow-hidden border border-black"
           onClick={() => document.getElementById("imageInput")?.click()}
         >
           {preview ? (
@@ -139,10 +141,12 @@ export default function NewRestaurant() {
           />
         </div>
 
-        <div className="w-[50%] pl-4">
+        {/* Input Section */}
+        <div className="md:w-[50%] md:pl-4">
           <label className="block font-bold">Nombre del restaurante:</label>
           <input
             type="text"
+            placeholder="Nombre del restaurante"
             name="name"
             className="border p-2 w-full rounded-[15px]"
             onChange={handleChange}
@@ -154,6 +158,7 @@ export default function NewRestaurant() {
           </label>
           <input
             type="text"
+            placeholder="Dirección"
             name="address"
             className="border p-2 w-full rounded-[15px]"
             onChange={handleChange}
@@ -163,6 +168,7 @@ export default function NewRestaurant() {
           <label className="font-bold block mt-2">Cuisine:</label>
           <input
             type="text"
+            placeholder="Tipo de cocina"
             name="cuisine"
             className="border p-2 w-full rounded-[15px]"
             onChange={handleChange}
@@ -174,6 +180,7 @@ export default function NewRestaurant() {
               <label className="font-bold block">Lat:</label>
               <input
                 type="text"
+                placeholder="Latitud"
                 name="lat"
                 className="border p-2 w-full rounded-[15px]"
                 onChange={handleChange}
@@ -184,6 +191,7 @@ export default function NewRestaurant() {
               <label className="font-bold block">Lng:</label>
               <input
                 type="text"
+                placeholder="Longitud"
                 name="lng"
                 className="border p-2 w-full rounded-[15px]"
                 onChange={handleChange}
@@ -195,6 +203,7 @@ export default function NewRestaurant() {
           <label className="font-bold block mt-2">Descripción:</label>
           <textarea
             name="description"
+            placeholder="Escribe información acerca del restaurante"
             className="border p-2 w-full rounded-[15px]"
             onChange={handleChange}
             required

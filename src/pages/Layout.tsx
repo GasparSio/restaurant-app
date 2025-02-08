@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Outlet, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,34 +10,56 @@ export default function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const menuRef = useRef<HTMLDivElement>(null); // Referencia para el menú
 
+  //If there is no token, redirect to the home page
   useEffect(() => {
-        if (!token) {
-          navigate("/");
-        } else {
-          try {
-            const decodedToken = jwtDecode<{ username: string }>(token);
-            setUserName(decodedToken.username);
-          } catch (error) {
-            toast.error(`Error al decodificar el token: ${error}`, {
-              autoClose: 2000,
-            });
-          }
-        }
+    if (!token) {
+      navigate("/");
+    } else {
+      try {
+        //Set the username to display in the user menu
+        const decodedToken = jwtDecode<{ username: string }>(token);
+        setUserName(decodedToken.username);
+      } catch (error) {
+        toast.error(`Error al decodificar el token: ${error}`, {
+          autoClose: 2000,
+        });
+      }
+    }
   }, []);
 
+  // Log out the user and remove the token from local storage
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("userName"); // Asegúrate de borrar el usuario
+    localStorage.removeItem("userName");
     navigate("/");
   };
 
+  // Close the user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
     <div className="relative min-h-screen bg-gray-100">
-    <ToastContainer />
+      <ToastContainer />
+      
       {/* Render User Menu*/}
       {userName && (
-        <div className="absolute top-4 right-4 z-[999]">
+        <div className="absolute top-4 right-4 z-[999]" ref={menuRef}>
           <button
             className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 hover:bg-gray-100"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
