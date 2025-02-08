@@ -88,9 +88,9 @@ const Restaurants: React.FC = () => {
       )}
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row w-[80%] h-auto md:h-[80%] gap-6 mt-[100px] self-start">
+      <div className="flex flex-col lg:flex-row w-[80%] h-auto lg:h-[80%] gap-6 mt-[100px] self-start">
         {/* Map section */}
-        <div className="w-full md:w-3/5 h-[300px] md:h-full rounded-lg overflow-hidden shadow-lg bg-gray-200 md:order-1">
+        <div className="w-full lg:w-3/5 h-[300px] lg:h-full rounded-lg overflow-hidden shadow-lg bg-gray-200 md:order-1">
           <LoadScript
             googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
           >
@@ -120,7 +120,7 @@ const Restaurants: React.FC = () => {
         </div>
 
         {/* Restaurant List */}
-        <div className="w-full md:w-2/5 h-auto overflow-y-auto bg-white p-4 shadow-lg rounded-lg relative md:order-2">
+        <div className="w-full lg:w-2/5 h-auto overflow-y-auto bg-white p-4 shadow-lg rounded-lg relative md:order-2">
           {restaurants.map((restaurant) => {
             const averageRating =
               restaurant.comments && restaurant.comments.length > 0
@@ -135,23 +135,23 @@ const Restaurants: React.FC = () => {
               <div
                 onClick={() => handleRestaurant(restaurant)}
                 key={restaurant.id}
-                className="flex items-center gap-4 p-4 border-b cursor-pointer hover:bg-gray-100"
+                className="flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-100"
               >
                 <img
                   src={`http://localhost:5001/${restaurant.image}`}
                   alt={restaurant.name}
-                  className="w-20 h-20 rounded-lg object-cover"
+                  className="w-24 h-24 rounded-lg object-cover"
                 />
-                <div className="flex flex-col items-center justify-center flex-1">
-                  <span className="text-lg font-semibold text-center">
+                <div className="flex flex-col justify-center flex-1">
+                  <span className="text-lg font-semibold text-left">
                     {restaurant.name}
                   </span>
-                  <span className="text-sm text-gray-600 text-center">
+                  <span className="text-sm text-gray-600 text-left">
                     {restaurant.address}
                   </span>
 
                   {/* Dinamic stars */}
-                  <span className="text-blue-500 flex items-center gap-1 text-center">
+                  <span className="text-blue-500 flex items-center gap-1 text-left mt-3">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <FontAwesomeIcon
                         key={i}
@@ -160,10 +160,10 @@ const Restaurants: React.FC = () => {
                             ? solidStar
                             : regularStar
                         }
-                        className="text-yellow-500"
+                        className="text-blue-500"
                       />
                     ))}
-                    <span className="ml-2 text-gray-600 text-center">
+                    <span className="text-sm ml-2 text-gray-600 text-center">
                       ({restaurant.comments?.length ?? 0} comentarios)
                     </span>
                   </span>

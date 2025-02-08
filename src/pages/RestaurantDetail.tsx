@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
   faTrash,
+  faArrowLeft,
   faStar as solidStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
@@ -34,6 +35,7 @@ const RestaurantDetail: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -193,6 +195,17 @@ const RestaurantDetail: React.FC = () => {
   return (
     <div className="flex flex-col items-center w-screen min-h-screen bg-white">
       <ToastContainer />
+
+      {/* Go Back Button */}
+      <div className="absolute top-0 left-0 m-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="cursor-pointer w-[60px] h-[30px] border border-black rounded-[10px]"
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+      </div>
+
       {/* Modal for editing comment */}
       {showModal && editingComment && (
         <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
@@ -203,7 +216,7 @@ const RestaurantDetail: React.FC = () => {
                 <FontAwesomeIcon
                   key={i}
                   icon={i < editingComment.rating ? solidStar : regularStar}
-                  className="text-yellow-500 cursor-pointer text-2xl"
+                  className="text-blue-500 cursor-pointer text-2xl"
                   onClick={() => handleStarClickInModal(i)}
                 />
               ))}
@@ -240,8 +253,9 @@ const RestaurantDetail: React.FC = () => {
           <img
             src={`http://localhost:5001/${restaurant.image}`}
             alt={restaurant.name}
-            className="w-full h-full object-cover rounded-lg shadow-lg opacity-80"
+            className="w-full h-full relative object-cover rounded-lg shadow-lg"
           />
+          <div className="w-full h-full absolute top-0 left-0 bg-black opacity-50"></div>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-white rounded-lg">
             <h1 className="text-4xl font-bold">{restaurant.name}</h1>
             <p className="text-lg">{restaurant.address}</p>
@@ -251,14 +265,14 @@ const RestaurantDetail: React.FC = () => {
         {/* Main Content */}
         <div className="flex flex-col md:flex-row w-[80%] gap-6 mx-auto">
           {/* Add comment */}
-          <div className="border md:order-2 border-black p-6 rounded-lg shadow-lg max-h-[300px]">
+          <div className="flex flex-col justify-between border md:order-2 border-black p-8 px-10 rounded-lg shadow-lg max-h-[300px]">
             {/* Interactive stars */}
             <div className="flex gap-1 mb-4">
               {Array.from({ length: 5 }).map((_, i) => (
                 <FontAwesomeIcon
                   key={i}
                   icon={i < rating ? solidStar : regularStar}
-                  className="text-yellow-500 cursor-pointer text-2xl"
+                  className="text-blue-500 cursor-pointer text-2xl"
                   onClick={() => handleStarClick(i)}
                 />
               ))}
@@ -266,7 +280,7 @@ const RestaurantDetail: React.FC = () => {
 
             {/* Comment input */}
             <textarea
-              className="w-full p-3 border border-black rounded-lg text-black placeholder-black focus:outline-none"
+              className="w-full pb-3 rounded-lg text-black placeholder-black focus:outline-none"
               rows={3}
               placeholder="Escribe tu comentario aquí..."
               value={comment}
@@ -276,7 +290,7 @@ const RestaurantDetail: React.FC = () => {
             {/* Botón de enviar */}
             <button
               onClick={handleSubmit}
-              className="mt-4 w-full border border-black text-black py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer"
+              className="mt-4 w-[50%] border border-black text-black py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer"
             >
               Enviar
             </button>
@@ -304,7 +318,7 @@ const RestaurantDetail: React.FC = () => {
                           <FontAwesomeIcon
                             key={i}
                             icon={i < comment.rating ? solidStar : regularStar}
-                            className="text-yellow-500 text-lg"
+                            className="text-blue-500 text-lg"
                           />
                         ))}
                       </div>

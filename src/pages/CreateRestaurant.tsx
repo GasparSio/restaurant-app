@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/LogoSimple.svg";
 
 interface Restaurant {
@@ -95,28 +97,40 @@ export default function NewRestaurant() {
     return (
       <div className="flex flex-col items-center justify-center w-screen h-screen bg-white">
         <div className="h-[40%] max-h-[800px] flex flex-col justify-evenly items-center w-[40%] max-w-[600px]">
-          <img src={logo} alt="Logo" className="w-15 h-15" />
+          <img src={logo} alt="Logo" className="w-10 h-10" />
           <span className="text-blue-600 text-lg font-semibold">
             Restaurante guardado
           </span>
-          <button 
-            className="h-[40px] w-[50%] border-black border rounded-[10px] font-bold mt-4" 
-            onClick={() => navigate("/restaurants")}>
+          <button
+            className="h-[40px] w-[50%] border-black border rounded-[10px] font-bold mt-4"
+            onClick={() => navigate("/restaurants")}
+          >
             Ver restaurante
           </button>
-          <img src={logo} alt="Logo" className="w-15 h-15" />
+          <img src={logo} alt="Logo" className="w-10 h-10" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen bg-white">
+    <div className="flex flex-col items-center justify-center w-screen h-screen bg-white">
       <ToastContainer />
+      {/* Go Back Button */}
+      <div className="absolute top-0 left-0 m-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="cursor-pointer w-[60px] h-[30px] border border-black rounded-[10px]"
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+      </div>
+
+      <img src={logo} alt="Logo" className="w-10 h-10" />
       {/* Form Section */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-lg w-[80%] max-w-[746px] flex flex-col md:flex-row text-left"
+        className="bg-white p-6 rounded-lg shadow-lg w-[80%] max-w-[746px] my-7 flex flex-col md:flex-row text-left"
       >
         {/* Image Section */}
         <div
@@ -217,6 +231,7 @@ export default function NewRestaurant() {
           </button>
         </div>
       </form>
+      <img src={logo} alt="Logo" className="w-10 h-10" />
     </div>
   );
 }
