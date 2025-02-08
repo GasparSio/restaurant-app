@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import logo from "../assets/LogoSimple.svg";
+import logo from "../../public/assets/LogoSimple.svg";
 
 interface Restaurant {
   name: string;

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import photoResto from "../assets/foto_resto1.jpg";
-import logo from "../assets/LogoCompletoBlanco.svg";
+import photoResto from "../../public/assets/foto_resto1.jpg";
+import logo from "../../public/assets/LogoCompletoBlanco.svg";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");

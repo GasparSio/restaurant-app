@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast, ToastContainer } from "react-toastify";
-import photoResto from "../assets/foto_resto1.jpg";
-import logo from "../assets/LogoCompletoBlanco.svg";
+import photoResto from "../../public/assets/foto_resto1.jpg";
+import logo from "../../public/assets/LogoCompletoBlanco.svg";
 
 const SingIn = () => {
   const [step, setStep] = useState(1);

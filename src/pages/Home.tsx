@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/Type=default.svg";
-import photoResto from "../assets/foto_resto1.jpg";
+import logo from "../../public/assets/Type=default.svg";
+import photoResto from "../../public/assets/foto_resto1.jpg";
 
 const Home = () => {
   const navigate = useNavigate();

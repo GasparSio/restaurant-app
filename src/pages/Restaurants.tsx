@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 // import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { mapStyles } from "../assets/map_styles";
+import { mapStyles } from "../../public/assets/map_styles";
 import { toast, ToastContainer } from "react-toastify";
 
 //Map styles
