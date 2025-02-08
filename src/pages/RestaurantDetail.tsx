@@ -249,9 +249,41 @@ const RestaurantDetail: React.FC = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex w-[80%] gap-6 mx-auto">
+        <div className="flex flex-col md:flex-row w-[80%] gap-6 mx-auto">
+          {/* Add comment */}
+          <div className="border md:order-2 border-black p-6 rounded-lg shadow-lg max-h-[300px]">
+            {/* Interactive stars */}
+            <div className="flex gap-1 mb-4">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <FontAwesomeIcon
+                  key={i}
+                  icon={i < rating ? solidStar : regularStar}
+                  className="text-yellow-500 cursor-pointer text-2xl"
+                  onClick={() => handleStarClick(i)}
+                />
+              ))}
+            </div>
+
+            {/* Comment input */}
+            <textarea
+              className="w-full p-3 border border-black rounded-lg text-black placeholder-black focus:outline-none"
+              rows={3}
+              placeholder="Escribe tu comentario aquí..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+
+            {/* Botón de enviar */}
+            <button
+              onClick={handleSubmit}
+              className="mt-4 w-full border border-black text-black py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer"
+            >
+              Enviar
+            </button>
+          </div>
+
           {/* Description and list of comments */}
-          <div className="flex-1 bg-white p-6 rounded-lg shadow-lg">
+          <div className="flex-1 md:order-1 bg-white p-6 rounded-lg shadow-lg">
             {/* Descripción */}
             <p className="text-gray-700 text-lg leading-relaxed">
               {restaurant.description}
@@ -305,38 +337,6 @@ const RestaurantDetail: React.FC = () => {
                 )}
               </div>
             </div>
-          </div>
-
-          {/* Add comment */}
-          <div className="border border-black p-6 rounded-lg shadow-lg max-h-[500px]">
-            {/* Interactive stars */}
-            <div className="flex gap-1 mb-4">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <FontAwesomeIcon
-                  key={i}
-                  icon={i < rating ? solidStar : regularStar}
-                  className="text-yellow-500 cursor-pointer text-2xl"
-                  onClick={() => handleStarClick(i)}
-                />
-              ))}
-            </div>
-
-            {/* Comment input */}
-            <textarea
-              className="w-full p-3 border border-black rounded-lg text-black placeholder-black focus:outline-none"
-              rows={3}
-              placeholder="Escribe tu comentario aquí..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-
-            {/* Botón de enviar */}
-            <button
-              onClick={handleSubmit}
-              className="mt-4 w-full border border-black text-black py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer"
-            >
-              Enviar
-            </button>
           </div>
         </div>
       </div>

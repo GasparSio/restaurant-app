@@ -118,7 +118,7 @@ const Restaurants: React.FC = () => {
       )}
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row w-[80%] h-auto md:h-[80%] gap-6">
+      <div className="flex flex-col md:flex-row w-[80%] h-auto md:h-[80%] gap-6 mt-[100px] self-start">
         {/* Map section */}
         <div className="w-full md:w-3/5 h-[300px] md:h-full rounded-lg overflow-hidden shadow-lg bg-gray-200 md:order-1">
           <LoadScript
@@ -143,10 +143,6 @@ const Restaurants: React.FC = () => {
                     lng: Number(restaurant.lng),
                   }}
                   title={restaurant.name}
-                  icon={{
-                    url: "../assets/Ellipse 1.png",
-                    scale: 30,
-                  }}
                 />
               ))}
             </GoogleMap>
