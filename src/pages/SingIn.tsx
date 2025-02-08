@@ -67,7 +67,7 @@ const SingIn = () => {
       <div className="flex flex-col-reverse md:flex-row w-[80%] h-auto md:h-[80%] gap-6">
         {/* Form section */}
         <div className="flex-1 h-[auto] flex justify-center md:self-end md:justify-end max-h-[600px]">
-          <div className="bg-[#264BEB] shadow-lg rounded-lg p-8 text-white w-full flex flex-col justify-between">
+          <div className="bg-[#264BEB] shadow-lg rounded-[20px] p-8 text-white w-full flex flex-col justify-between">
             <ToastContainer />
             {/* Step 1? show the first form */}
             {step === 1 ? (

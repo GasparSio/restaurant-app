@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+// import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { mapStyles } from "../assets/map_styles";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -35,24 +35,24 @@ interface Restaurant {
 const Restaurants: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userName, setUserName] = useState<string>("Nombre usuario");
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [userName, setUserName] = useState<string>("Nombre usuario");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/");
-    } else {
-      try {
-        const decodedToken = jwtDecode<{ username: string }>(token);
-        setUserName(decodedToken.username);
-      } catch (error) {
-        toast.error(`Error al decodificar el token: ${error}`, {
-          autoClose: 2000,
-        });
-      }
-    }
+    // const token = localStorage.getItem("token");
+    // if (!token) {
+    //   navigate("/");
+    // } else {
+    //   try {
+    //     const decodedToken = jwtDecode<{ username: string }>(token);
+    //     setUserName(decodedToken.username);
+    //   } catch (error) {
+    //     toast.error(`Error al decodificar el token: ${error}`, {
+    //       autoClose: 2000,
+    //     });
+    //   }
+    // }
 
     // Fetch restaurants from API
     setTimeout(() => {
@@ -79,36 +79,6 @@ const Restaurants: React.FC = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-white relative">
       <ToastContainer />
-      {/* User Menu */}
-      <div className="absolute top-4 right-4">
-        <button
-          className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 hover:bg-gray-100"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <span>{userName}</span>
-          <FontAwesomeIcon icon={isMenuOpen ? faChevronUp : faChevronDown} />
-        </button>
-
-        {isMenuOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-blue-600 text-white rounded-[15px_0px_15px_15px] shadow-lg p-2 z-[999]">
-            <button
-              className="block w-full text-left px-4 py-2 hover:bg-blue-500 rounded"
-              onClick={() => navigate("/newrestaurant")}
-            >
-              Añadir Restaurante
-            </button>
-            <button
-              className="block w-full text-left px-4 py-2 mt-2 hover:bg-blue-500 rounded"
-              onClick={() => {
-                localStorage.removeItem("token");
-                navigate("/");
-              }}
-            >
-              Log Out
-            </button>
-          </div>
-        )}
-      </div>
 
       {/* Spinner Overlay */}
       {loading && (

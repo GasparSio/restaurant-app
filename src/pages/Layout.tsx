@@ -37,7 +37,7 @@ export default function Layout() {
     <ToastContainer />
       {/* Render User Menu*/}
       {userName && (
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 z-[999]">
           <button
             className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 hover:bg-gray-100"
             onClick={() => setIsMenuOpen(!isMenuOpen)}

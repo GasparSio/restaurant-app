@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import photoResto from "../assets/foto_resto1.jpg";
-import logo from "../assets/Type=default.svg";
+import logo from "../assets/LogoCompletoBlanco.svg";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -77,12 +77,12 @@ const LogIn = () => {
 
         {/* Sección del formulario - Aparece abajo en móvil */}
         <div className="flex-1 flex h-[50%] md:self-end justify-center md:justify-end md:order-1">
-          <div className="bg-[#264BEB] shadow-lg rounded-lg p-8 text-white w-full flex flex-col justify-around">
+          <div className="bg-[#264BEB] shadow-lg rounded-[20px] p-8 text-white w-full flex flex-col justify-around">
             <span className="text-2xl font-bold w-[30%] max-w-[100px]">
               <img src={logo} alt="tailor icon" />
             </span>
             <form onSubmit={handleLogin} className="flex flex-col w-full">
-              <span className="text-left">Email:</span>
+              <span className="text-left font-bold">Email:</span>
               <input
                 type="email"
                 placeholder="Escribe tu email"
@@ -90,7 +90,7 @@ const LogIn = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-[80%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
               />
-              <span className="text-left">Contraseña:</span>
+              <span className="text-left font-bold">Contraseña:</span>
               <input
                 type="password"
                 placeholder="Escribe tu contraseña"
@@ -100,9 +100,9 @@ const LogIn = () => {
               />
               <button
                 type="submit"
-                className="cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px]"
+                className="font-bold bg-white text-[black] cursor-pointer w-[150px] h-[40px] border border-white rounded-[10px] mt-[5px]"
               >
-                Entrar
+                Siguiente
               </button>
             </form>
             <p className="text-left">
