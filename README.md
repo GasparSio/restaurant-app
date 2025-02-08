@@ -10,7 +10,13 @@ To initialize the project, run:
 npm install
 npm run dev
 ```
+## Environment Variables
 
+Create a `.env` file in the root of your project and add the following variable:
+
+```sh
+VITE_GOOGLE_MAPS_API_KEY=your_api_key_here
+```
 ## Available Plugins
 
 Currently, two official plugins are available:
