@@ -9,6 +9,7 @@ import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+   {/** Set an error boundary for general errors */}
     <ErrorBoundary FallbackComponent={ErrorPage}>
       <AuthProvider>
         <BrowserRouter>
