@@ -5,7 +5,6 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast, ToastContainer } from "react-toastify";
 
-
 const Register = () => {
   const [step, setStep] = useState(1);
   const [username, setUsername] = useState("");
@@ -21,6 +20,11 @@ const Register = () => {
   }
 
   const { register } = auth;
+
+  // Handle go to register page
+  const handleGoToLogin = () => {
+    navigate("/login");
+  };
   
   //Handle next step to insert the password
   const handleNextStep = (e: { preventDefault: () => void }) => {
@@ -43,9 +47,9 @@ const Register = () => {
       });
       return;
     }
-  
+
     const response = await register(username, email, password);
-  
+
     if (response.success) {
       toast.success(response.message, {
         autoClose: 2000,
@@ -92,7 +96,9 @@ const Register = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-[80%] p-2 border border-white rounded-[15px] bg-transparent text-white placeholder-white mb-2"
                   />
-                  <span className="font-bold text-left">Nombre de usuario:</span>
+                  <span className="font-bold text-left">
+                    Nombre de usuario:
+                  </span>
                   <input
                     type="text"
                     placeholder="Añade tu nombre"
@@ -107,6 +113,15 @@ const Register = () => {
                     Siguiente
                   </button>
                 </form>
+                <p className="text-left mt-3">
+                  Ya estas registrado?{" "}
+                  <span
+                    onClick={handleGoToLogin}
+                    className="cursor-pointer underline"
+                  >
+                    Login
+                  </span>
+                </p>
               </>
             ) : (
               //Step 2? show the second part of the form
@@ -126,7 +141,9 @@ const Register = () => {
                   onSubmit={handleRegister}
                   className="flex flex-col w-full h-auto min-h-[125px] justify-between mt-[40px]"
                 >
-                  <span className="font-bold text-left">Crea una nueva contraseña:</span>
+                  <span className="font-bold text-left">
+                    Crea una nueva contraseña:
+                  </span>
                   <input
                     type="password"
                     placeholder="Añade una contraseña"

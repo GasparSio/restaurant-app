@@ -9,7 +9,7 @@ const LogIn = () => {
 
   // Handle go to register page
   const handleGoToRegister = () => {
-    navigate("/singin");
+    navigate("/register");
   };
 
   // Handle user login
