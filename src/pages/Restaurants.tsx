@@ -37,7 +37,6 @@ const Restaurants: React.FC = () => {
   const url = `${import.meta.env.VITE_URL_FETCH_RESTAURANTS}`;
   //Uso del custom hook useFetch
   const response = useFetch(url);
-  console.log(response);
   const { data: restaurants, loading, error } = response as { data: Restaurant[] | null, loading: boolean, error: string };
   
   if (error) {

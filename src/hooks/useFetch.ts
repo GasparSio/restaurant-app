@@ -11,7 +11,6 @@ export const useFetch = <T>(url: string) => {
             try {
                 setTimeout(async () => {
                     const result = await fetchDataFromApi<T>(url);
-                    console.log('result en usefetch', result);
                     setData(result);
                     setLoading(false);
                 }, 1000);
