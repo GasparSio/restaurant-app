@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/authContext"; // Adjust the import path as necessary
 import { useNavigate } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast, ToastContainer } from "react-toastify";
 
-const SingIn = () => {
+
+const Register = () => {
   const [step, setStep] = useState(1);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  // Obtener el contexto de autenticación
+  const auth = useContext(AuthContext);
+
+  if (!auth) {
+    throw new Error("AuthContext must be used within an AuthProvider");
+  }
+
+  const { register } = auth;
+  
   //Handle next step to insert the password
   const handleNextStep = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -32,28 +43,16 @@ const SingIn = () => {
       });
       return;
     }
-
-    //Request to the API to register the user
-    try {
-      const response = await fetch("https://restaurant-api-ld1w.onrender.com/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+  
+    const response = await register(username, email, password);
+  
+    if (response.success) {
+      toast.success(response.message, {
+        autoClose: 2000,
       });
-
-      //Handle the response of the API
-      if (response.ok) {
-        toast.success("User registered successfully!", {
-          autoClose: 2000,
-        });
-        setTimeout(() => navigate("/login"), 1000);
-      } else {
-        toast.error("There was an error, try again!", {
-          autoClose: 2000,
-        });
-      }
-    } catch (error) {
-      toast.error(`There was an error, try again!, ${error}`, {
+      navigate("/login");
+    } else {
+      toast.error(response.message, {
         autoClose: 2000,
       });
     }
@@ -160,4 +159,4 @@ const SingIn = () => {
   );
 };
 
-export default SingIn;
+export default Register;

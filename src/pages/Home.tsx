@@ -26,7 +26,7 @@ const Home = () => {
             </p>
           </div>
           <button
-            onClick={() => navigate("/singin")}
+            onClick={() => navigate("/register")}
             className="cursor-pointer border border-black w-20 h-9 rounded-[15px] mt-[10px]"
           >
             Entrar

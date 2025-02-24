@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +6,7 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { mapStyles } from "../../public/assets/map_styles";
 import { toast, ToastContainer } from "react-toastify";
+import { useFetch } from "../hooks/useFetch";
 
 //Map styles
 const mapContainerStyle = {
@@ -31,29 +32,20 @@ interface Restaurant {
 }
 
 const Restaurants: React.FC = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-  const [loading, setLoading] = useState(true);
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [userName, setUserName] = useState<string>("Nombre usuario");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Fetch restaurants from API
-    setTimeout(() => {
-      fetch("https://restaurant-api-ld1w.onrender.com/api/restaurants")
-        .then((response) => response.json())
-        .then((data) => {
-          setRestaurants(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          toast.error(`Error fetching restaurants: ${error}`, {
-            autoClose: 2000,
-          });
-          setLoading(false);
-        });
-    }, 1000);
-  }, []);
+  const url = `${import.meta.env.VITE_URL_FETCH_RESTAURANTS}`;
+  //Uso del custom hook useFetch
+  const response = useFetch(url);
+  console.log(response);
+  const { data: restaurants, loading, error } = response as { data: Restaurant[] | null, loading: boolean, error: string };
+  
+  if (error) {
+    toast.error(`Error fetching restaurants: ${response.error}`, {
+      autoClose: 2000,
+    });
+  }
+  
 
   // Handle restaurant click to navigate to detail page
   const handleRestaurant = (restaurant: Restaurant) => {
@@ -89,7 +81,7 @@ const Restaurants: React.FC = () => {
                 styles: mapStyles,
               }}
             >
-              {restaurants.map((restaurant) => (
+              {restaurants?.map((restaurant) => (
                 <Marker
                   key={restaurant.id}
                   position={{
@@ -105,7 +97,7 @@ const Restaurants: React.FC = () => {
 
         {/* Restaurant List */}
         <div className="w-full lg:w-2/5 h-auto overflow-y-auto bg-white p-4 shadow-lg rounded-lg relative md:order-2">
-          {restaurants.map((restaurant) => {
+          {restaurants?.map((restaurant) => {
             const averageRating =
               restaurant.comments && restaurant.comments.length > 0
                 ? restaurant.comments.reduce(
